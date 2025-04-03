@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:8888/api/";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 class AuthService {
   // Register user
   register(name, email, password) {
