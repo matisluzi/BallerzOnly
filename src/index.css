@@ -44,3 +44,33 @@
 .text-accent {
   @apply text-neutral-600 dark:text-neutral-400;
 }
+
+.profile-col1 {
+  @apply min-h-80 flex items-center text-center self-center 
+}
+
+.profile-col2 {
+ @apply min-h-80 
+}
+
+.profile-title {
+  @apply text-center dark:bg-neutral-900 text-4xl mb-5
+}
+
+.profile-name {
+  @apply text-center dark:bg-neutral-900 mb-25 
+}
+
+.profile-following-title {
+  @apply text-center dark:bg-neutral-900 mb-5 
+}
+
+.profile-following {
+  @apply text-center dark:bg-neutral-900 border-2 rounded-lg min-h-25 px-5 pt-2
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* optional but good practice */
+}
