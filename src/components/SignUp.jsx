@@ -53,6 +53,8 @@ function SignUp() {
           state: { message: "Registration successful. Please log in." },
         });
       } else {
+        // print the error message
+        console.error("Registration error:", response.data);
         // Handle unexpected success format
         setError("Registration failed. Please try again.");
       }
