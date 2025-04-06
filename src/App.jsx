@@ -6,7 +6,7 @@ import LogIn from "./components/LogIn";
 import Feed from "./pages/Feed";
 import Favorites from "./pages/Favorites";
 import Profile from "./pages/Profile";
-// import Search from "./pages/Search";
+import Search from "./pages/Search";
 
 import "./index.css";
 
@@ -37,6 +37,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/search"
+            element={
+              <ProtectedRoute>
+                <Search />
               </ProtectedRoute>
             }
           />
