@@ -8,7 +8,7 @@ class JwtHandler {
 
     public function __construct() {
         // Set your JWT secret key here
-        $this->jwt_secret = "your_jwt_secret_key";
+        $this->jwt_secret = "your_jwt_secret_key"; // TODO: replace
         
         // Set the time that the token was issued at
         $this->issuedAt = time();

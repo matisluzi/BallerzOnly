@@ -1,6 +1,17 @@
 <?php
+
 // Allow cross-origin resource sharing (CORS)
-header("Access-Control-Allow-Origin: http://localhost:5173");
+// Allow specific origins
+$allowed_origins = [
+    'http://localhost:5173',
+    'https://cise.ufl.edu/~m.luzi/BallerzOnly'
+];
+
+$origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+
+if (in_array($origin, $allowed_origins)) {
+    header("Access-Control-Allow-Origin: $origin");
+}
 header("Access-Control-Allow-Methods: GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 header("Access-Control-Allow-Credentials: true");
