@@ -4,11 +4,15 @@ import Welcome from "./pages/Welcome";
 import SignUp from "./components/SignUp";
 import LogIn from "./components/LogIn";
 import Feed from "./pages/Feed";
+import Favorites from "./pages/Favorites";
+import Profile from "./pages/Profile";
+// import Search from "./pages/Search";
+
 import "./index.css";
 
 function App() {
   return (
-    <div className="mx-auto md:max-w-2xl">
+    <div className="mx-auto md:max-w-3xl">
       <main>
         <Routes>
           <Route path="/" element={<Welcome />} />
@@ -24,10 +28,20 @@ function App() {
             path="/favorites"
             element={
               <ProtectedRoute>
-                <h2>Favorites</h2>
+                <Favorites />
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+
+
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<LogIn />} />
         </Routes>
