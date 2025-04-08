@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import axios from "axios";
 import { API_BASE_URL, HEADERS } from "../api";
+import GameNBA from "../components/GameNBA";
 
 // get games for certain team
 function getTeamGames(teamId) {

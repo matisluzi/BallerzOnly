@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import axios from "axios";
 import { API_BASE_URL, HEADERS } from "../api";
+import GameNBA from "../components/GameNBA";
 
 // get today's games from API
 function getTodaysGames() {
@@ -42,14 +43,11 @@ function Feed() {
       <h1 className="mb-6 text-2xl font-bold">Feed</h1>
 
       {/* Feed content will go here */}
-      <div className="rounded-lg bg-white p-4 shadow">
-        <h2 className="mb-4 text-xl font-semibold">Today's Games</h2>
+      <h2 className="mb-4 text-xl font-semibold">Today's Games</h2>
+
+      <div className="flex flex-wrap gap-4">
         {games.length > 0 ? (
-          games.map((game) => (
-            <div key={game.id} className="mb-4 rounded border p-4">
-              <h3 className="text-lg font-bold">{`${game.teams.home.name} vs ${game.teams.visitors.name}`}</h3>
-            </div>
-          ))
+          games.map((game) => <GameNBA key={game.id} game={game} />)
         ) : (
           <p>No games today.</p>
         )}
