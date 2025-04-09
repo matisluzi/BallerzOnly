@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import TeamBasketball from "../components/TeamBasketball";
 
 const TeamSearchBar = ({ teams }) => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -7,12 +8,12 @@ const TeamSearchBar = ({ teams }) => {
         setSearchTerm(event.target.value);
     };
 
-    const filteredTeams = teams.filter(
-        (team) => team.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filteredTeams = teams.filter((team) => {
+        return team.name.toLowerCase().includes(searchTerm.toLowerCase());
+    });
 
     return (
-        <div className="rounded-lg bg-white p-4 shadow">
+        <div className="bg-secondary rounded-lg p-4">
             <h3 className="text-lg">
                 <input
                     type="text"
@@ -26,7 +27,7 @@ const TeamSearchBar = ({ teams }) => {
                 {teams.length > 0 ? (
                     filteredTeams.map((team) => (
                         <li key={team.id} className="mb-4 rounded border p-4">
-                            <h3 className="text-lg font-bold">{`${team.name}`}</h3>
+                            <h3 className="text-lg font-bold"><TeamBasketball key={team.id} team={team} /></h3>
                         </li>
                     ))
                 ) : (
