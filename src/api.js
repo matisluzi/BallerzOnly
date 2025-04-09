@@ -38,3 +38,20 @@ export const getTeamGames = (teamId, date) => {
     return [];
   });
 };
+
+// Get all teams
+export const getTeams = () => {
+  const url = `${API_BASE_URL}teams`;
+  return axios.get(url).then((response) => {
+    if (
+      response.data &&
+      response.data.sports &&
+      response.data.sports[0].leagues &&
+      response.data.sports[0].leagues[0].teams
+    ) {
+      // Extract the teams and return the array of team objects.
+      return response.data.sports[0].leagues[0].teams.map(team => team.team);
+    }
+    return [];
+  });
+};
