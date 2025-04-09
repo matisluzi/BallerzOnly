@@ -11,7 +11,7 @@ function Search() {
     useEffect(() => {
         getTeams()
             .then((teams) => {
-                console.log("Fetched teams:", teams);
+                //console.log("Fetched teams:", teams);
                 setTeams(teams);
             })
             .catch((error) => {
