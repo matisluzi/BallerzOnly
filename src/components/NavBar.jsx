@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthService from "../auth/AuthService";
+import ThemeToggle from "./ThemeToggle";
+import { CaretDown } from "@phosphor-icons/react";
 
 function NavBar() {
   const navigate = useNavigate();
@@ -53,8 +55,8 @@ function NavBar() {
   };
 
   return (
-    <div className="fixed top-0 left-0 z-10 flex w-full justify-center px-2 py-3">
-      <div className="bg-secondary w-full rounded-xl px-4 py-2 shadow-lg md:max-w-xl">
+    <div className="fixed top-0 left-0 z-50 flex w-full justify-center px-2 py-3">
+      <div className="w-full rounded-xl bg-neutral-200/70 px-4 py-2 backdrop-blur-2xl md:max-w-2xl dark:bg-stone-800/70">
         <div className="flex items-center justify-between">
           {/* Title */}
           <Link to="/" className="text-xl font-bold">
@@ -75,40 +77,38 @@ function NavBar() {
           </div>
 
           {/* Sport & Account */}
-          <div className="flex items-center space-x-4">
-            <div className="relative ml-2">
-              <button
-                className="bg-tertiary rounded px-2 py-1 text-sm hover:bg-blue-600"
-                onClick={() => {
-                  const newSport = sport === "NBA" ? "NFL" : "NBA";
-                  setSport(newSport);
-                }}
-              >
-                {sport}
-              </button>
-            </div>
+          <div className="flex items-center space-x-2">
+            {/* Theme toggle */}
+            <ThemeToggle size={22} />
 
+            {/* Sport selection */}
+            <button
+              className="bg-tertiary flex items-center rounded px-2 py-1 text-sm"
+              onClick={() => {
+                const newSport = sport === "NBA" ? "NFL" : "NBA";
+                setSport(newSport);
+              }}
+            >
+              {sport}
+              <CaretDown
+                size={16}
+                className="text-primary ml-1"
+                weight="bold"
+              />
+            </button>
+
+            {/* Account dropdown */}
             <div className="relative">
-              {/* Account dropdown (user is always logged in) */}
               <button
-                className="bg-tertiary flex items-center rounded px-2 py-1 text-sm hover:bg-blue-600"
+                className="bg-tertiary flex items-center rounded px-2 py-1 text-sm"
                 onClick={toggleAccountDropdown}
               >
                 Account
-                <svg
-                  className="ml-1 h-4 w-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
+                <CaretDown
+                  size={16}
+                  className="text-primary ml-1"
+                  weight="bold"
+                />
               </button>
 
               {isDropdownOpen && (
