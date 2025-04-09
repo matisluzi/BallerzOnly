@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import TeamSearchBar from '../components/TeamSearchBar';
-import axios from "axios";
-import { API_BASE_URL, HEADERS } from "../api";
-
-// Fetch all teams from the api
-function getTeams() {
-    return axios.get(`${API_BASE_URL}teams`, {
-        headers: HEADERS,
-    });
-}
+import { getTeams } from "../api";
 
 function Search() {
     // State variables will go here
@@ -18,15 +10,12 @@ function Search() {
     // useEffect hooks will go here
     useEffect(() => {
         getTeams()
-            .then((response) => {
-                const filteredTeams = response.data.response.filter(
-                    // Only legitimite NBA teams will be added (May change in future)
-                    (team) => team.nbaFranchise && !team.allStar
-                );
-                setTeams(filteredTeams);
+            .then((teams) => {
+                console.log("Fetched teams:", teams);
+                setTeams(teams);
             })
             .catch((error) => {
-                console.error("Error fetching today's games:", error);
+                console.error("Error fetching teams:", error);
             });
     }, []);
 
