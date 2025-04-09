@@ -7,9 +7,8 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(0, 0, 0, 0.87);
-  background-color: #fff;
+  @apply bg-white text-neutral-900;
+  color: #222;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -17,9 +16,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-:root .dark {
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+button {
+  cursor: pointer;
+}
+
+.dark {
+  @apply bg-neutral-900 text-neutral-100;
 }
 
 /* Light + Dark theme */
@@ -46,27 +48,27 @@
 }
 
 .profile-col1 {
-  @apply min-h-80 flex items-center text-center self-center 
+  @apply flex min-h-80 items-center self-center text-center;
 }
 
 .profile-col2 {
- @apply min-h-80 
+  @apply min-h-80;
 }
 
 .profile-title {
-  @apply text-center dark:bg-neutral-900 text-4xl mb-5
+  @apply mb-5 text-center text-4xl dark:bg-neutral-900;
 }
 
 .profile-name {
-  @apply text-center dark:bg-neutral-900 mb-25 
+  @apply mb-25 text-center dark:bg-neutral-900;
 }
 
 .profile-following-title {
-  @apply text-center dark:bg-neutral-900 mb-5 
+  @apply mb-5 text-center dark:bg-neutral-900;
 }
 
 .profile-following {
-  @apply text-center dark:bg-neutral-900 border-2 rounded-lg min-h-25 px-5 pt-2
+  @apply min-h-25 rounded-lg border-2 px-5 pt-2 text-center dark:bg-neutral-900;
 }
 
 body {
