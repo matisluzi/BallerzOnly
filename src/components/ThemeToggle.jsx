@@ -1,16 +1,22 @@
 import { useTheme } from "../theme/ThemeContext.jsx";
 import { Moon, Sun } from "@phosphor-icons/react";
 
-export const ThemeToggle = () => {
+function ThemeToggle({ size = 24 }) {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <button onClick={toggleTheme} className="rounded-md p-2">
+    <button onClick={toggleTheme} className="">
       {theme === "dark" ? (
-        <Sun size={24} color="#FFD700" />
+        <Sun
+          weight="fill"
+          size={size}
+          className="text-neutral-100 transition-colors hover:text-amber-200"
+        />
       ) : (
-        <Moon size={24} color="#FFD700" />
+        <Moon weight="fill" size={size} className="text-primary" />
       )}
     </button>
   );
-};
+}
+
+export default ThemeToggle;
