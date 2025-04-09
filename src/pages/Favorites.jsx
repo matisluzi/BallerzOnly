@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
-import axios from "axios";
-import { API_BASE_URL, HEADERS } from "../api";
-
-// get games for certain team
-function getTeamGames(teamId) {
-  var games = axios.get(`${API_BASE_URL}games?team=${teamId}&season=2023`, {
-    headers: HEADERS,
-  });
-  return games;
-}
+import { getTeamGames, formatDateForAPI } from "../api";
+import GameBasketball from "../components/GameBasketball";
 
 function Feed() {
   // State variables will go here
@@ -18,12 +10,13 @@ function Feed() {
 
   // useEffect hooks will go here
   useEffect(() => {
-    getTeamGames("1") // Replace "1" with the actual team ID you want to fetch games for
-      .then((response) => {
-        setGames(response.data.response);
+    getTeamGames("19") // Replace "19" with the actual team ID you want to fetch games for
+      .then((games) => {
+        console.log("Fetched games:", games);
+        setGames(games);
       })
       .catch((error) => {
-        console.error("Error fetching team games:", error);
+        console.error("Error fetching games:", error);
       });
   }, [favorites]);
 
@@ -35,14 +28,10 @@ function Feed() {
       <h1 className="mb-6 text-2xl font-bold">Favorites</h1>
 
       {/* Feed content will go here */}
-      <div className="rounded-lg bg-white p-4 shadow">
+      <div className="bg-secondary rounded-lg p-4">
         <h2 className="mb-4 text-xl font-semibold">Your Favorite Teams</h2>
         {games.length > 0 ? (
-          games.map((game) => (
-            <div key={game.id} className="mb-4 rounded border p-4">
-              <h3 className="text-lg font-bold">{`${game.teams.home.name} vs ${game.teams.visitors.name}`}</h3>
-            </div>
-          ))
+          games.map((game) => <GameBasketball key={game.id} game={game} />)
         ) : (
           <p>No games for team found.</p>
         )}
