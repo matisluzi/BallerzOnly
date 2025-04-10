@@ -105,6 +105,8 @@ class AuthController {
                 http_response_code(200);
                 
                 $_SESSION['user_id'] = $this->user->id; // ADDED LINE
+                echo "this is ur user id";
+                echo $this->user->id;
                 // Response message with token
                 return json_encode(array(
                     "success" => true,

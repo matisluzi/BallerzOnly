@@ -13,22 +13,20 @@ function getTeamGames(teamId) {
 
 function Feed() {
   // State variables will go here
-  const [favorites, setFavorites] = useState([]);
+  //const [favorites, setFavorites] = useState([]);
   const [games, setGames] = useState([]);
   const [team, setTeam] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-<<<<<<< Updated upstream
-    getTeamGames("1") // Replace "1" with the actual team ID you want to fetch games for
-      .then((response) => {
-        setGames(response.data.response);
-      })
-      .catch((error) => {
-        console.error("Error fetching team games:", error);
-      });
-  }, [favorites]);
-=======
+    // getTeamGames("1") // Replace "1" with the actual team ID you want to fetch games for
+  //     .then((response) => {
+  //       setGames(response.data.response);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching team games:", error);
+  //     });
+  // }, [favorites]);
     // Function to fetch the preferred team
     const fetchPreferredTeam = async () => {
       try {
@@ -38,7 +36,6 @@ function Feed() {
             'Content-Type': 'application/json',
           },
         });
-
         const data = await response.json();
 
         if (data.team_id) {
@@ -57,18 +54,17 @@ function Feed() {
   }, []);
 
   // // useEffect hooks will go here
-  // useEffect(() => {
+  useEffect(() => {
     
-  //   getTeamGames("19") // Replace "19" with the actual team ID you want to fetch games for
-  //     .then((games) => {
-  //       console.log("Fetched games:", games);
-  //       setGames(games);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching games:", error);
-  //     });
-  // }, [favorites]);
->>>>>>> Stashed changes
+    getTeamGames(team) // Replace "19" with the actual team ID you want to fetch games for
+      .then((games) => {
+        console.log("Fetched games:", games);
+        setGames(games);
+      })
+      .catch((error) => {
+        console.error("Error fetching games:", error);
+      });
+  }, [team]);
 
   return (
     <div className="container mx-auto mt-20 p-4">

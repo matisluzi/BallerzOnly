@@ -5,6 +5,10 @@ require_once __DIR__ . '/models/Prefers.php';
 
 // Check if the user is authenticated
 session_start();
+if(empty($_SESSION['valid'])){
+    header('Location: login.php');
+    http_response_code(405);
+}
 $_SESSION['user_id'] = $user_id; // Store the user ID in the session
 if (!isset($_SESSION['user_id'])) {
     echo json_encode(["error" => "User not authenticated"]);
