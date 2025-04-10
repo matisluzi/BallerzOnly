@@ -136,33 +136,64 @@ class AuthController {
             ));
         }
     }
-    
-    // Get user profile
+
     public function getProfile($userId) {
-        // Get user by ID
-        if ($this->user->getById($userId)) {
-            // Set HTTP response code - 200 OK
-            http_response_code(200);
+        try {
+            $query = "SELECT id, name, email, profile_picture FROM users WHERE id = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute([$userId]);
             
-            // Response message with user data
-            return json_encode(array(
-                "success" => true,
-                "user" => array(
-                    "id" => $this->user->id,
-                    "name" => $this->user->name,
-                    "email" => $this->user->email,
-                    "created_at" => $this->user->created_at
-                )
-            ));
-        } else {
-            // Set HTTP response code - 404 Not Found
-            http_response_code(404);
-            
-            // Response message
+            if ($stmt->rowCount() > 0) {
+                $user = $stmt->fetch(PDO::FETCH_ASSOC);
+                
+                // Convert BLOB to base64 for sending to frontend
+                if ($user['profile_picture']) {
+                    $user['profile_picture'] = base64_encode($user['profile_picture']);
+                }
+                
+                return json_encode(array(
+                    "success" => true,
+                    "user" => $user
+                ));
+            } else {
+                return json_encode(array(
+                    "success" => false,
+                    "message" => "User not found"
+                ));
+            }
+        } catch (Exception $e) {
             return json_encode(array(
                 "success" => false,
-                "message" => "User not found"
+                "message" => "Error: " . $e->getMessage()
             ));
         }
     }
+    
+    // Upload profile picture
+    public function uploadProfilePicture($userId, $imageData) {
+        try {
+            $query = "UPDATE users SET profile_picture = ? WHERE id = ?";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute([$imageData, $userId]);
+            
+            if ($stmt->rowCount() > 0) {
+                return json_encode(array(
+                    "success" => true,
+                    "message" => "Profile picture updated successfully"
+                ));
+            } else {
+                return json_encode(array(
+                    "success" => false,
+                    "message" => "Failed to update profile picture"
+                ));
+            }
+        } catch (Exception $e) {
+            return json_encode(array(
+                "success" => false,
+                "message" => "Error: " . $e->getMessage()
+            ));
+        }
+    }
+
+
 }
