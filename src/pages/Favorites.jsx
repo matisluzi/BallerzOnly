@@ -15,9 +15,11 @@ function Feed() {
   // State variables will go here
   const [favorites, setFavorites] = useState([]);
   const [games, setGames] = useState([]);
+  const [team, setTeam] = useState(null);
+  const [error, setError] = useState(null);
 
-  // useEffect hooks will go here
   useEffect(() => {
+<<<<<<< Updated upstream
     getTeamGames("1") // Replace "1" with the actual team ID you want to fetch games for
       .then((response) => {
         setGames(response.data.response);
@@ -26,6 +28,47 @@ function Feed() {
         console.error("Error fetching team games:", error);
       });
   }, [favorites]);
+=======
+    // Function to fetch the preferred team
+    const fetchPreferredTeam = async () => {
+      try {
+        const response = await fetch('../../api/preferredTeam.php', {
+          method: 'GET', 
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        const data = await response.json();
+
+        if (data.team_id) {
+          console.log("your fav team's id: ", data.team_id);
+          setTeam(data.team_id); // Set the team ID if found
+          getTeamGames(team);
+        } else {
+          setError("No preferred team found or user is not authenticated");
+        }
+      } catch (err) {
+        setError('Error fetching data');
+      }
+    };
+
+    fetchPreferredTeam();
+  }, []);
+
+  // // useEffect hooks will go here
+  // useEffect(() => {
+    
+  //   getTeamGames("19") // Replace "19" with the actual team ID you want to fetch games for
+  //     .then((games) => {
+  //       console.log("Fetched games:", games);
+  //       setGames(games);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching games:", error);
+  //     });
+  // }, [favorites]);
+>>>>>>> Stashed changes
 
   return (
     <div className="container mx-auto mt-20 p-4">

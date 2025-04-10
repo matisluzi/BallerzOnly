@@ -2,6 +2,7 @@
 
 // Allow cross-origin resource sharing (CORS)
 // Allow specific origins
+session_start();
 $allowed_origins = [
     'http://localhost:5173',
     'https://cise.ufl.edu/~m.luzi/BallerzOnly'
@@ -47,3 +48,4 @@ $data = json_decode(file_get_contents("php://input"));
 
 // Call login method
 echo $authController->login($data);
+

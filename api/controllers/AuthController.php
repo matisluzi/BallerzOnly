@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../models/User.php';
 require_once __DIR__ . '/../utils/JwtHandler.php';
-
+session_start();
 class AuthController {
     private $db;
     private $user;
@@ -104,6 +104,7 @@ class AuthController {
                 // Set HTTP response code - 200 OK
                 http_response_code(200);
                 
+                $_SESSION['user_id'] = $this->user->id; // ADDED LINE
                 // Response message with token
                 return json_encode(array(
                     "success" => true,
