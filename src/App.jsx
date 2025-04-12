@@ -7,6 +7,7 @@ import Feed from "./pages/Feed";
 import Favorites from "./pages/Favorites";
 import Profile from "./pages/Profile";
 import Search from "./pages/Search";
+import FirstLogin from "./pages/FirstLogin";
 
 import "./index.css";
 
@@ -45,6 +46,15 @@ function App() {
             element={
               <ProtectedRoute>
                 <Search />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/firstlogin"
+            element={
+              <ProtectedRoute>
+                <FirstLogin />
               </ProtectedRoute>
             }
           />
