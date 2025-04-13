@@ -21,6 +21,9 @@ const LogoWithFallback = ({ src, alt }) => {
 };
 
 function GameBasketball({ game }) {
+  // tracking hover state
+  const [hovered, setHovered] = useState(false);
+
   // home team
   // if short team name is not available, use display name
   const homeTeam =
@@ -67,8 +70,22 @@ function GameBasketball({ game }) {
     minute: "2-digit",
   });
 
+  // getting geoboradcasts
+  const geoBroadcasts = game.competitions[0].geoBroadcasts
+    ?.map((b) => b.media?.shortName)
+    .filter(Boolean)
+    .join(", ") || "No broadcast info";
+
   return (
-    <div className="bg-primary flex w-72 items-center justify-between rounded-lg p-4">
+    <div className="relative bg-primary flex w-72 items-center justify-between rounded-lg p-4 hover:shadow-lg transition-shadow duration-200"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {hovered && (
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full bg-black text-white text-xs rounded px-2 py-1 mb-1 z-10 whitespace-nowrap">
+          {geoBroadcasts}
+        </div>
+      )}
       <div className="flex basis-1/4 flex-col items-center gap-2">
         <LogoWithFallback src={homeLogo} alt={homeTeam} />
         <p className="text-sm">{homeTeam}</p>
