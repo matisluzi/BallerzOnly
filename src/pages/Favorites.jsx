@@ -108,14 +108,19 @@ function Favorites() {
         <h2 className="mb-4 text-xl font-semibold">Your Favorite Teams</h2>
         {favorites.length > 0 ? (
           favorites.map((teamId) => (
-            <div key={teamId} className="mb-6 rounded-lg bg-white p-4 shadow">
-              <h3 className="mb-3 text-lg font-semibold text-blue-600">
+            <div
+              key={teamId}
+              className="mb-6 rounded-lg bg-white p-4 shadow dark:bg-neutral-900/60"
+            >
+              <h3 className="mb-3 text-lg font-semibold text-blue-600 dark:text-blue-300">
                 {teamDetails[teamId]?.team.displayName || "Loading..."}
               </h3>
 
               {/* Games section */}
               <div className="space-y-4">
-                <h4 className="font-medium text-gray-700">Upcoming Games:</h4>
+                <h4 className="font-medium text-gray-700 dark:text-gray-300">
+                  Upcoming Games:
+                </h4>
                 {games[teamId] && games[teamId].length > 0 ? (
                   <div className="space-y-3">
                     {games[teamId].map((game) => (
