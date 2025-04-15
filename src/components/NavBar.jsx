@@ -76,26 +76,10 @@ function NavBar() {
             </Link>
           </div>
 
-          {/* Sport & Account */}
+          {/* Theme & Account */}
           <div className="flex items-center space-x-2">
             {/* Theme toggle */}
             <ThemeToggle size={22} />
-
-            {/* Sport selection */}
-            <button
-              className="bg-tertiary flex items-center rounded px-2 py-1 text-sm"
-              onClick={() => {
-                const newSport = sport === "NBA" ? "NFL" : "NBA";
-                setSport(newSport);
-              }}
-            >
-              {sport}
-              <CaretDown
-                size={16}
-                className="text-primary ml-1"
-                weight="bold"
-              />
-            </button>
 
             {/* Account dropdown */}
             <div className="relative">
