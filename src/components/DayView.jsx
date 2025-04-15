@@ -112,7 +112,7 @@ const DayView = ({ dayData, index, direction, onToggleExpand }) => {
             ) : dayData.games.length > 0 ? (
               <div className="flex flex-wrap gap-4 pt-4">
                 {dayData.games.map((game) => (
-                  <GameBasketball key={game.id} game={game} />
+                  <GameBasketball key={game.id} gameId={game.id} />
                 ))}
               </div>
             ) : (

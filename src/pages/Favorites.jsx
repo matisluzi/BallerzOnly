@@ -1,43 +1,151 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
-import { getTeamGames, formatDateForAPI } from "../api";
+import { getTeamGames, getTeamDetails, getFavorites } from "../api";
 import GameBasketball from "../components/GameBasketball";
 
-function Feed() {
+function Favorites() {
   // State variables will go here
   const [favorites, setFavorites] = useState([]);
-  const [games, setGames] = useState([]);
+  const [teamDetails, setTeamDetails] = useState({});
+  const [games, setGames] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // useEffect hooks will go here
+  // Fetch favorites when the component mounts
   useEffect(() => {
-    getTeamGames("19") // Replace "19" with the actual team ID you want to fetch games for
-      .then((games) => {
-        console.log("Fetched games:", games);
-        setGames(games);
+    setLoading(true);
+    getFavorites()
+      .then((response) => {
+        const favs = response.favorites;
+        setFavorites(favs);
+
+        // Create two promise arrays - one for games, one for team details
+        const gamePromises = favs.map((id) =>
+          getTeamGames(id)
+            .then((teamGames) => ({ teamId: id, games: teamGames }))
+            .catch((err) => {
+              console.error(`Error fetching games for team ${id}:`, err);
+              return { teamId: id, games: [] };
+            }),
+        );
+
+        const detailPromises = favs.map((id) =>
+          getTeamDetails(id)
+            .then((details) => ({ teamId: id, details }))
+            .catch((err) => {
+              console.error(`Error fetching details for team ${id}:`, err);
+              return { teamId: id, details: null };
+            }),
+        );
+
+        // Return a promise that resolves when both sets of promises are complete
+        return Promise.all([
+          Promise.all(gamePromises),
+          Promise.all(detailPromises),
+        ]);
+      })
+      .then(([teamGamesArray, teamDetailsArray]) => {
+        // Process games data
+        const gamesObj = {};
+        teamGamesArray.forEach((item) => {
+          gamesObj[item.teamId] = item.games;
+        });
+        setGames(gamesObj);
+
+        // Process team details data
+        const detailsObj = {};
+        teamDetailsArray.forEach((item) => {
+          detailsObj[item.teamId] = item.details;
+        });
+        setTeamDetails(detailsObj);
+
+        console.log("Games data:", gamesObj);
+        console.log("Team details data:", detailsObj);
+        setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching games:", error);
+        console.error("Error fetching data:", error);
+        setError("Failed to load your favorite teams. Please try again later.");
+        setLoading(false);
       });
-  }, [favorites]);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="container mx-auto mt-20 p-4">
+        <NavBar />
+        <div className="flex h-64 items-center justify-center">
+          <div className="h-12 w-12 animate-spin rounded-full border-t-2 border-b-2 border-blue-500"></div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="container mx-auto mt-20 p-4">
+        <NavBar />
+        <div
+          className="relative rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
+          role="alert"
+        >
+          <strong className="font-bold">Error! </strong>
+          <span className="block sm:inline">{error}</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto mt-20 p-4">
       <NavBar />
 
       {/* Main content */}
-      <h1 className="mb-6 text-2xl font-bold">Favorites</h1>
+      <h1 className="mb-6 text-2xl font-bold">Feed</h1>
 
-      {/* Feed content will go here */}
-      <div className="bg-secondary rounded-lg p-4">
+      {/* Favorites feed content */}
+      <div className="bg-secondary mb-6 rounded-lg p-4">
         <h2 className="mb-4 text-xl font-semibold">Your Favorite Teams</h2>
-        {games.length > 0 ? (
-          games.map((game) => <GameBasketball key={game.id} game={game} />)
+        {favorites.length > 0 ? (
+          favorites.map((teamId) => (
+            <div key={teamId} className="mb-6 rounded-lg bg-white p-4 shadow">
+              <h3 className="mb-3 text-lg font-semibold text-blue-600">
+                {teamDetails[teamId]?.team.displayName || "Loading..."}
+              </h3>
+
+              {/* Games section */}
+              <div className="space-y-4">
+                <h4 className="font-medium text-gray-700">Upcoming Games:</h4>
+                {games[teamId] && games[teamId].length > 0 ? (
+                  <div className="space-y-3">
+                    {games[teamId].map((game) => (
+                      <GameBasketball key={game.id} gameId={game.id} />
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-gray-500 italic">
+                    No upcoming games scheduled
+                  </p>
+                )}
+              </div>
+            </div>
+          ))
         ) : (
-          <p>No games for team found.</p>
+          <div className="py-8 text-center">
+            <p className="mb-4 text-gray-500">
+              You haven't added any favorite teams yet.
+            </p>
+            <a
+              href="/favorites"
+              className="inline-block rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600"
+            >
+              Add Favorite Teams
+            </a>
+          </div>
         )}
       </div>
     </div>
   );
 }
 
-export default Feed;
+export default Favorites;
