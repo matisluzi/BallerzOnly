@@ -119,7 +119,7 @@ function Favorites() {
               {/* Games section */}
               <div className="space-y-4">
                 <h4 className="font-medium text-gray-700 dark:text-gray-300">
-                  Upcoming Games:
+                  Games:
                 </h4>
                 {games[teamId] && games[teamId].length > 0 ? (
                   <div className="space-y-3">
