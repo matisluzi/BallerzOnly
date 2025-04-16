@@ -65,13 +65,22 @@ function NavBar() {
 
           {/* Links */}
           <div className="flex items-center space-x-4">
-            <Link to="/favorites" className="text-sm md:text-base">
+            <Link
+              to="/favorites"
+              className="text-sm transition-colors hover:text-neutral-500 md:text-base"
+            >
               Favorites
             </Link>
-            <Link to="/feed" className="text-sm md:text-base">
+            <Link
+              to="/feed"
+              className="text-sm transition-colors hover:text-neutral-500 md:text-base"
+            >
               Feed
             </Link>
-            <Link to="/search" className="text-sm md:text-base">
+            <Link
+              to="/search"
+              className="text-sm transition-colors hover:text-neutral-500 md:text-base"
+            >
               Search
             </Link>
           </div>
