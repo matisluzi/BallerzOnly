@@ -31,7 +31,6 @@ function TeamBasketball({ team }) {
   const teamLogo = team.logos?.[0].href;
 
   const teamURL = team.links?.[0].href;
-  console.log(teamURL);
 
   return (
     <div className="bg-primary flex items-center gap-x-16 rounded-lg p-4">
