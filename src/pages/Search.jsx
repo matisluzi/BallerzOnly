@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
-import TeamSearchBar from '../components/TeamSearchBar';
+import TeamSearchBar from '../components/TeamFavoriteSearch';
 import { getTeams } from "../api";
 
 function Search() {
-    // State variables will go here
     const [teams, setTeams] = useState([]);
+    const [message, setMessage] = useState(""); // Feedback message
 
-    // useEffect hooks will go here
     useEffect(() => {
         getTeams()
             .then((teams) => {
-                //console.log("Fetched teams:", teams);
                 setTeams(teams);
             })
             .catch((error) => {
@@ -19,16 +17,41 @@ function Search() {
             });
     }, []);
 
+    const handleAddTeam = (team) => {
+        // Add to favorites logic goes here
+
+        // Show feedback message
+        setMessage(`${team.name} added to favorites!`);
+        setTimeout(() => {
+            setMessage("");
+        }, 3000); // Clear message after 3 seconds
+    };
+
     return (
         <div className="container mx-auto mt-20 p-4">
-        <NavBar />
+            <NavBar />
 
-        {/* Main content */}
-        <h1 className="mb-6 text-2xl font-bold">Search</h1>
+            {message && (
+                <div className="mb-4 p-3 rounded bg-green-100 text-green-700 shadow">
+                    {message}
+                </div>
+            )}
 
-        {/* Search content will go here */}
-        <TeamSearchBar teams={teams} />
-
+            {/* Search Bar */}
+            <div className="mt-12">
+                <h2 className="text-xl font-semibold mb-4">Search for teams</h2>
+                <TeamSearchBar
+                    teams={teams}
+                    renderExtra={(team) => (
+                        <button
+                            onClick={() => handleAddTeam(team)}
+                            className="ml-4 text-green-600 text-lg hover:text-green-800"
+                        >
+                            Add to Favorites
+                        </button>
+                    )}
+                />
+            </div>
         </div>
     );
 }
