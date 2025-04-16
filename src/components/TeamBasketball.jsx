@@ -20,17 +20,29 @@ const LogoWithFallback = ({ src, alt }) => {
   );
 };
 
+function ToTeamWebsite(url) {
+  window.open(url, '_blank');
+}
+
 function TeamBasketball({ team }) {
   // if short team name is not available, use display name
   const teamName = team.name || team.displayName;
 
-  const teamLogo = team.logo || team.logos?.[0].href;
+  const teamLogo = team.logos?.[0].href;
+
+  const teamURL = team.links?.[0].href;
+  console.log(teamURL);
 
   return (
-    <div className="bg-primary flex w-32 items-center justify-between rounded-lg p-4">
+    <div className="bg-primary flex items-center gap-x-16 rounded-lg p-4">
       <div className="flex basis-1/4 flex-col items-center gap-2">
         <LogoWithFallback src={teamLogo} alt={teamName} />
         <p className="text-sm">{teamName}</p>
+      </div>
+      <div className="flex basis-1/4 flex-col items-center gap-2">
+        <button onClick={() => ToTeamWebsite(teamURL)}>
+          &gt;
+        </button>
       </div>
     </div>
   );
