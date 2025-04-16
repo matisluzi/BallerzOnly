@@ -105,7 +105,7 @@ function Favorites() {
     <div className="container mx-auto mt-20 p-4">
       <NavBar />
 
-      <h1 className="mb-6 text-2xl font-bold">Feed</h1>
+      <h1 className="mb-6 text-2xl font-bold">Your Feed</h1>
 
       <div className="bg-secondary mb-6 rounded-lg p-4">
         <h2 className="mb-4 text-xl font-semibold">Your Favorite Teams</h2>
