@@ -124,9 +124,23 @@ function Favorites() {
                 −
               </button>
 
-              <h3 className="mb-3 text-lg font-semibold text-blue-600 dark:text-blue-300">
-                {teamDetails[teamId]?.team.displayName || "Loading..."}
-              </h3>
+              {/* Linking to ESPN */}
+              {teamDetails[teamId]?.team ? (
+                <h3 className="mb-3 text-lg font-semibold text-blue-600 dark:text-blue-300">
+                  <a
+                    href={teamDetails[teamId].team.links?.[0]?.href || "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline"
+                  >
+                    {teamDetails[teamId].team.displayName}
+                  </a>
+                </h3>
+              ) : (
+                <h3 className="mb-3 text-lg font-semibold text-blue-600 dark:text-blue-300">
+                  Loading...
+                </h3>
+              )}
 
               {/* Games section */}
               <div className="space-y-4">
