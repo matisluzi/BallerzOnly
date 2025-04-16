@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
 import TeamSearchBar from '../components/TeamFavoriteSearch';
 import TeamBasketball from "../components/TeamBasketball";
-import { getTeams } from "../api";
+import { getTeams, addFavorite } from "../api";
 
 function FirstLogin() {
   const [teams, setTeams] = useState([]);
@@ -39,7 +39,7 @@ function FirstLogin() {
 
   const handleAddTeam = (team) => {
     // Add to favorites logic goes here
-
+    addFavorite(team.id);
     // Show feedback message
     setMessage(`${team.name} added to favorites!`);
     setTimeout(() => {
