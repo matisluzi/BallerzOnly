@@ -112,4 +112,27 @@ class Favorites {
 
         return false;
     }
+
+    public function joinFavorite(){
+        // Sanitize user input
+        $this->user_id = htmlspecialchars(strip_tags($this->user_id));
+        $this->team_id = htmlspecialchars(strip_tags($this->team_id));
+
+        // Join query (join favorites on users)
+        $query = "SELECT (*) FROM " . $this->table_name . "
+                INNER JOIN user_id on users.user_id = $this->user_id
+                WHERE user_id = :user_id AND team_id = :team_id";
+        // Prepare query
+        $stmt = $this->conn->prepare($query);
+
+        // Bind values
+        $stmt->bindParam(":user_id", $this->user_id);
+        $stmt->bindParam(":team_id", $this->team_id);
+
+        // Execute query
+        if ($stmt->execute()) {
+            return $stmt;
+        }
+        return false;
+    }
 }
