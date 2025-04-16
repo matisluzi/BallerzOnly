@@ -56,7 +56,7 @@ function NavBar() {
 
   return (
     <div className="fixed top-0 left-0 z-50 flex w-full justify-center px-2 py-3">
-      <div className="w-full rounded-xl bg-neutral-200/70 px-4 py-2 backdrop-blur-2xl md:max-w-2xl dark:bg-stone-800/70">
+      <div className="w-full rounded-xl bg-neutral-200/70 px-4 py-2 backdrop-blur-2xl md:max-w-3xl dark:bg-stone-800/70">
         <div className="flex items-center justify-between">
           {/* Title */}
           <Link to="/" className="text-xl font-bold">
@@ -65,13 +65,22 @@ function NavBar() {
 
           {/* Links */}
           <div className="flex items-center space-x-4">
-            <Link to="/favorites" className="text-sm md:text-base">
+            <Link
+              to="/favorites"
+              className="text-sm transition-colors hover:text-neutral-500 md:text-base"
+            >
               Favorites
             </Link>
-            <Link to="/feed" className="text-sm md:text-base">
+            <Link
+              to="/feed"
+              className="text-sm transition-colors hover:text-neutral-500 md:text-base"
+            >
               Feed
             </Link>
-            <Link to="/search" className="text-sm md:text-base">
+            <Link
+              to="/search"
+              className="text-sm transition-colors hover:text-neutral-500 md:text-base"
+            >
               Search
             </Link>
           </div>
@@ -96,20 +105,13 @@ function NavBar() {
               </button>
 
               {isDropdownOpen && (
-                <div className="absolute right-0 z-20 mt-2 w-48 rounded-md bg-white py-1 text-gray-800 shadow-lg">
+                <div className="absolute right-0 z-20 mt-0 w-48 rounded-md bg-neutral-50 py-1 shadow-lg dark:bg-neutral-800">
                   <Link
                     to="/profile"
                     className="block px-4 py-2 hover:bg-gray-100"
                     onClick={() => setIsDropdownOpen(false)}
                   >
                     Profile
-                  </Link>
-                  <Link
-                    to="/settings"
-                    className="block px-4 py-2 hover:bg-gray-100"
-                    onClick={() => setIsDropdownOpen(false)}
-                  >
-                    Settings
                   </Link>
                   <button
                     onClick={handleLogout}

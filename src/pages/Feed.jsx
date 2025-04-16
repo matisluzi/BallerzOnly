@@ -11,12 +11,12 @@ function Feed() {
   const [direction, setDirection] = useState(null); // 'up' or 'down' for animation direction
   const containerRef = useRef(null);
 
-  // Initialize with 3 days (today, tomorrow, day after tomorrow)
+  // Initialize with 5 days
   useEffect(() => {
     const today = new Date();
     const daysArray = [];
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 5; i++) {
       const date = new Date(today);
       date.setDate(today.getDate() + i);
       daysArray.push({
@@ -164,7 +164,7 @@ function Feed() {
 
           <motion.div
             ref={containerRef}
-            className="w-full overflow-hidden rounded-lg border border-gray-200 dark:border-gray-600"
+            className="w-full overflow-hidden rounded-lg"
             variants={containerVariants}
             initial="hidden"
             animate="visible"

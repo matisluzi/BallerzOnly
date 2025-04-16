@@ -56,8 +56,8 @@ const DayView = ({ dayData, index, direction, onToggleExpand }) => {
       layout
       className={`border-b border-gray-200 p-4 dark:border-gray-600 ${
         isToday(dayData.date)
-          ? "bg-blue-50 dark:bg-gray-800/30"
-          : "bg-gray-50 dark:bg-gray-800"
+          ? "bg-slate-200/70 dark:bg-slate-800/35"
+          : "bg-gray-50 dark:bg-neutral-800/50"
       }`}
     >
       <div className="flex items-center justify-between">
