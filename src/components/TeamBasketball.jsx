@@ -40,7 +40,7 @@ function TeamBasketball({ team }) {
       </div>
       <div className="flex basis-1/4 flex-col items-center gap-2">
         <button onClick={() => ToTeamWebsite(teamURL)}>
-          &gt;
+          View Info
         </button>
       </div>
     </div>
