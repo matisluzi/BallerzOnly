@@ -105,17 +105,17 @@ function NavBar() {
               </button>
 
               {isDropdownOpen && (
-                <div className="absolute right-0 z-20 mt-0 w-48 rounded-md bg-neutral-50 py-1 shadow-lg dark:bg-neutral-800">
+                <div className="absolute right-0 z-20 mt-0 flex w-48 flex-col rounded-md bg-neutral-50 py-1 shadow-lg dark:bg-neutral-800">
                   <Link
                     to="/profile"
-                    className="block px-4 py-2 hover:bg-gray-100"
+                    className="block px-4 py-2 hover:bg-neutral-200 dark:hover:bg-neutral-700"
                     onClick={() => setIsDropdownOpen(false)}
                   >
                     Profile
                   </Link>
                   <button
                     onClick={handleLogout}
-                    className="block w-full px-4 py-2 text-left hover:bg-gray-100"
+                    className="block px-4 py-2 text-left hover:bg-red-200 dark:hover:bg-red-900/50"
                   >
                     Logout
                   </button>
