@@ -20,13 +20,13 @@ const TeamSearchBar = ({ teams, renderExtra }) => {
                     placeholder="Search teams..."
                     value={searchTerm}
                     onChange={handleInputChange}
-                    className="w-full rounded border p-2"
+                    className="w-full rounded p-2"
                 />
             </h3>
             <ul>
                 {teams.length > 0 ? (
                     filteredTeams.map((team) => (
-                        <li key={team.id} className="mb-4 flex items-center justify-between rounded border p-4">
+                        <li key={team.id} className="mb-4 flex items-center justify-between rounded p-4">
                             <TeamBasketball team={team} />
                             {renderExtra?.(team)}
                         </li>
