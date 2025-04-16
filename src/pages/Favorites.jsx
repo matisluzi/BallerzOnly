@@ -141,7 +141,7 @@ function Favorites() {
               You haven't added any favorite teams yet.
             </p>
             <a
-              href="/favorites"
+              href="/#/search"
               className="inline-block rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600"
             >
               Add Favorite Teams

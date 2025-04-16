@@ -48,8 +48,8 @@ function NavBar() {
     // Dispatch storage event to notify other components
     window.dispatchEvent(new Event("storage"));
 
-    // Redirect to login page
-    navigate("/login", {
+    // Redirect to welcome page
+    navigate("/", {
       state: { message: "You have been logged out successfully." },
     });
   };
