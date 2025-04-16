@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
-import { getTeamGames, getTeamDetails, getFavorites } from "../api";
+import { getTeamGames, getTeamDetails, getFavorites, removeFavorite } from "../api";
 import GameBasketball from "../components/GameBasketball";
 
 function Favorites() {
@@ -59,8 +59,6 @@ function Favorites() {
         });
         setTeamDetails(detailsObj);
 
-        console.log("Games data:", gamesObj);
-        console.log("Team details data:", detailsObj);
         setLoading(false);
       })
       .catch((error) => {
@@ -69,6 +67,16 @@ function Favorites() {
         setLoading(false);
       });
   }, []);
+
+  const handleRemoveFavorite = (teamId) => {
+    removeFavorite(teamId)
+      .then(() => {
+        setFavorites((prev) => prev.filter((id) => id !== teamId));
+      })
+      .catch((err) => {
+        console.error("Failed to remove favorite:", err);
+      });
+  };
 
   if (loading) {
     return (
@@ -85,10 +93,7 @@ function Favorites() {
     return (
       <div className="container mx-auto mt-20 p-4">
         <NavBar />
-        <div
-          className="relative rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
-          role="alert"
-        >
+        <div className="relative rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700" role="alert">
           <strong className="font-bold">Error! </strong>
           <span className="block sm:inline">{error}</span>
         </div>
@@ -100,27 +105,32 @@ function Favorites() {
     <div className="container mx-auto mt-20 p-4">
       <NavBar />
 
-      {/* Main content */}
       <h1 className="mb-6 text-2xl font-bold">Feed</h1>
 
-      {/* Favorites feed content */}
       <div className="bg-secondary mb-6 rounded-lg p-4">
         <h2 className="mb-4 text-xl font-semibold">Your Favorite Teams</h2>
         {favorites.length > 0 ? (
           favorites.map((teamId) => (
             <div
               key={teamId}
-              className="mb-6 rounded-lg bg-white p-4 shadow dark:bg-neutral-900/60"
+              className="relative mb-6 rounded-lg bg-white p-4 shadow dark:bg-neutral-900/60"
             >
+              {/* Remove button */}
+              <button
+                onClick={() => handleRemoveFavorite(teamId)}
+                className="absolute top-2 right-2 text-red-500 text-lg hover:text-red-700"
+                title="Remove from Favorites"
+              >
+                −
+              </button>
+
               <h3 className="mb-3 text-lg font-semibold text-blue-600 dark:text-blue-300">
                 {teamDetails[teamId]?.team.displayName || "Loading..."}
               </h3>
 
               {/* Games section */}
               <div className="space-y-4">
-                <h4 className="font-medium text-gray-700 dark:text-gray-300">
-                  Games:
-                </h4>
+                <h4 className="font-medium text-gray-700 dark:text-gray-300">Games:</h4>
                 {games[teamId] && games[teamId].length > 0 ? (
                   <div className="space-y-3">
                     {games[teamId].map((game) => (
@@ -128,18 +138,14 @@ function Favorites() {
                     ))}
                   </div>
                 ) : (
-                  <p className="text-gray-500 italic">
-                    No upcoming games scheduled
-                  </p>
+                  <p className="text-gray-500 italic">No upcoming games scheduled</p>
                 )}
               </div>
             </div>
           ))
         ) : (
           <div className="py-8 text-center">
-            <p className="mb-4 text-gray-500">
-              You haven't added any favorite teams yet.
-            </p>
+            <p className="mb-4 text-gray-500">You haven't added any favorite teams yet.</p>
             <a
               href="/#/search"
               className="inline-block rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600"
