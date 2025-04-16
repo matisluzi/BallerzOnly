@@ -48,11 +48,12 @@ function SignUp() {
 
       // Check if registration was successful
       if (response.data && response.data.success) {
-        // Redirect to login page with success message
-        navigate("/login", {
+        // Redirect to login page with success message and firstlogin query param
+        navigate("/login?firstlogin=true", {
           state: { message: "Registration successful. Please log in." },
-        });
-      } else {
+        });        
+      } 
+      else {
         // print the error message
         console.error("Registration error:", response.data);
         // Handle unexpected success format
