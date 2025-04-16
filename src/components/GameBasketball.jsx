@@ -7,7 +7,7 @@ import { getEventDetails } from "../api";
 // show logo, or show question mark if logo is not available
 const LogoWithFallback = ({ src, alt }) => {
   const [error, setError] = useState(false);
-  return error ? (
+  return error || alt == "TBD" ? (
     <div className="bg-secondary flex h-10 w-10 items-center justify-center rounded-full">
       <Question size={32} color="#000" />
     </div>
@@ -71,9 +71,12 @@ function GameBasketball({ gameId }) {
   const isFinished = status === "STATUS_FINAL" || status === "STATUS_POSTPONED";
   const isScheduled = !isLive && !isFinished;
 
+  // espn link
+  const link = game.header.links?.[0]?.href || "";
+
   // get current period and clock if available
-  const period = game.header.competitions[0].status.period || 0; // TODO: FIX
-  const clock = game.header.competitions[0].status.displayClock || ""; // TODO: FIX
+  const period = game.header.competitions[0].status.period || 0;
+  const clock = game.header.competitions[0].status.displayClock || "";
 
   // home team
   const homeTeamData = game.header.competitions[0].competitors.filter(
@@ -128,9 +131,10 @@ function GameBasketball({ gameId }) {
 
   return (
     <div
-      className="bg-primary relative flex w-72 items-center justify-between rounded-lg p-4 transition-shadow duration-200 hover:shadow-lg"
+      className="bg-primary relative flex w-72 cursor-pointer items-center justify-between rounded-lg p-4 transition-all duration-200 hover:scale-105 hover:shadow-lg"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onClick={() => window.open(link, "_blank")}
     >
       {hovered && (
         <div className="absolute top-0 left-1/2 z-10 mb-1 -translate-x-1/2 -translate-y-full rounded bg-black px-2 py-1 text-xs whitespace-nowrap text-white">
