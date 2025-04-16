@@ -5,6 +5,11 @@ import AuthService from "../auth/AuthService";
 function LogIn() {
   const navigate = useNavigate();
   const location = useLocation();
+  
+  // checking for first login 
+  const queryParams = new URLSearchParams(location.search);
+  const isFirstLogin = queryParams.get("firstlogin") === "true";
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -46,7 +51,13 @@ function LogIn() {
       );
 
       if (response.success) {
-        navigate("/feed");
+        // check if first login
+        if (isFirstLogin) {
+          navigate("/firstlogin");
+        }
+        else {
+          navigate("/feed");
+        }
       }
     } catch (err) {
       if (err.response && err.response.data) {
