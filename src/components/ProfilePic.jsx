@@ -1,26 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import AuthService from "../auth/AuthService"; // Make sure path is correct
-import "../index.css";
+import AuthService from "../auth/AuthService";
+import { Question } from "@phosphor-icons/react";
+import { useDropzone } from "react-dropzone";
 
-function ProfilePicture({profilePicture, onPictureUpdate}) {
+function ProfilePicture({ profilePicture, onPictureUpdate }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
+  const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
 
-  // Handle file selection
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
+  // Handle file drop/selection using react-dropzone
+  useEffect(() => {
+    if (acceptedFiles && acceptedFiles.length > 0) {
+      const file = acceptedFiles[0];
       setSelectedFile(file);
-      
+
       // Create preview
       const reader = new FileReader();
       reader.onload = () => {
         setPreviewUrl(reader.result);
       };
       reader.readAsDataURL(file);
+
+      // Cleanup function for FileReader
+      return () => {
+        reader.abort(); // Abort reading if component unmounts or file changes
+      };
+    } else {
+      // Optional: Clear preview if no file is selected/dropped
+      // setSelectedFile(null); // Keep selectedFile if you want the upload button to persist until a new file is dropped
+      // setPreviewUrl(null); // Keep preview if desired, or clear it
     }
-  };
+  }, [acceptedFiles]); // Re-run effect when acceptedFiles changes
 
   // Upload profile picture
   const handleUpload = async () => {
@@ -31,7 +42,7 @@ function ProfilePicture({profilePicture, onPictureUpdate}) {
       const response = await axios.post(
         API_BASE_URL + "uploadPic.php",
         { image: previewUrl },
-        { headers: AuthService.authHeader() }
+        { headers: AuthService.authHeader() },
       );
 
       if (response.data.success) {
@@ -49,28 +60,41 @@ function ProfilePicture({profilePicture, onPictureUpdate}) {
     }
   };
 
-
-
   return (
-    <div className="profile-image">
+    <div className="flex flex-col gap-2">
+      <h2 className="text-lg font-bold">Profile Picture</h2>
+
       {/* Display profile picture from database or preview */}
-      <img
-        src={previewUrl || profilePicture || "https://via.placeholder.com/80"}
-        alt="Profile"
-      />
-      
+      {previewUrl || profilePicture ? (
+        <img
+          src={previewUrl || profilePicture}
+          alt="Profile"
+          className="max-w-36 rounded-2xl bg-white object-contain p-2"
+        />
+      ) : (
+        <div className="flex items-center gap-1">
+          <Question size={32} className="text-tertiary" />
+          <span className="text-tertiary">
+            You don't have a profile picture.
+          </span>
+        </div>
+      )}
+
       {/* Upload controls */}
       <div className="mt-2">
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleFileChange}
-          className="text-sm text-slate-500"
-        />
+        <div
+          {...getRootProps({
+            className:
+              "dropzone bg-primary hover:bg-neutral-400 p-4 border-1 border-neutral-400 cursor-pointer",
+          })}
+        >
+          <input {...getInputProps()} />
+          <p>Drag 'n' drop some files here, or click to select files</p>
+        </div>
         {selectedFile && (
           <button
             onClick={handleUpload}
-            className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-sm"
+            className="mt-2 rounded bg-blue-500 px-2 py-1 text-sm font-bold text-white hover:bg-blue-700"
           >
             Upload Picture
           </button>
