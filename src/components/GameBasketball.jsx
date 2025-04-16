@@ -72,8 +72,8 @@ function GameBasketball({ gameId }) {
   const isScheduled = !isLive && !isFinished;
 
   // get current period and clock if available
-  const period = game.status?.period || 0; // TODO: FIX
-  const clock = game.status?.displayClock || ""; // TODO: FIX
+  const period = game.header.competitions[0].status.period || 0; // TODO: FIX
+  const clock = game.header.competitions[0].status.displayClock || ""; // TODO: FIX
 
   // home team
   const homeTeamData = game.header.competitions[0].competitors.filter(
@@ -144,7 +144,7 @@ function GameBasketball({ gameId }) {
         <p className="text-sm">{homeTeam}</p>
         {(isLive || isFinished) && (
           <p
-            className={`text-lg font-bold ${winner === "home" ? "text-green-600" : "text-neutral-500"}`}
+            className={`text-lg font-bold ${winner === "home" ? "text-green-600" : ""}`}
           >
             {homeScore}
           </p>
@@ -163,7 +163,7 @@ function GameBasketball({ gameId }) {
         {isLive && (
           <>
             <p className="text-xs font-bold text-red-500">LIVE</p>
-            <p className="text-accent text-center text-sm">{`Period ${period}`}</p>
+            <p className="text-accent text-center text-sm">{`Quarter ${period}`}</p>
             <p className="text-accent text-center text-xs">{clock}</p>
           </>
         )}
@@ -186,7 +186,7 @@ function GameBasketball({ gameId }) {
         <p className="text-sm">{awayTeam}</p>
         {(isLive || isFinished) && (
           <p
-            className={`text-lg font-bold ${winner === "away" ? "text-green-600" : "text-neutral-500"}`}
+            className={`text-lg font-bold ${winner === "away" ? "text-green-600" : ""}`}
           >
             {awayScore}
           </p>
