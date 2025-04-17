@@ -89,7 +89,7 @@ function SignUp() {
             value={formData.name}
             onChange={handleChange}
             required
-            className="w-full rounded border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            className="w-full rounded border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-orange-500 focus:outline-none"
           />
         </div>
         <div className="mb-4">
@@ -103,7 +103,7 @@ function SignUp() {
             value={formData.email}
             onChange={handleChange}
             required
-            className="w-full rounded border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            className="w-full rounded border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-orange-500 focus:outline-none"
           />
         </div>
         <div className="mb-4">
@@ -118,7 +118,7 @@ function SignUp() {
             onChange={handleChange}
             required
             minLength="6"
-            className="w-full rounded border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            className="w-full rounded border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-orange-500 focus:outline-none"
           />
         </div>
         <div className="mb-6">
@@ -136,13 +136,13 @@ function SignUp() {
             onChange={handleChange}
             required
             minLength="6"
-            className="w-full rounded border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            className="w-full rounded border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-orange-500 focus:outline-none"
           />
         </div>
         <button
           type="submit"
           disabled={loading}
-          className="w-full rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:outline-none disabled:opacity-50"
+          className="w-full rounded bg-orange-600 px-4 py-2 text-white hover:bg-orange-700 focus:ring-2 focus:ring-orange-500 focus:outline-none disabled:opacity-50"
         >
           {loading ? "Signing up..." : "Sign Up"}
         </button>

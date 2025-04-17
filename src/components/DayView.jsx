@@ -68,7 +68,7 @@ const DayView = ({ dayData, index, direction, onToggleExpand }) => {
             {formatDateForDisplay(dayData.date)}
           </h2>
           {isToday(dayData.date) && (
-            <span className="rounded-full bg-blue-100 px-2 py-1 text-sm font-medium text-blue-600 dark:bg-gray-700 dark:text-blue-100">
+            <span className="rounded-full bg-orange-100 px-2 py-1 text-sm font-medium text-orange-600 dark:bg-gray-700 dark:text-orange-100">
               Today
             </span>
           )}
@@ -78,8 +78,8 @@ const DayView = ({ dayData, index, direction, onToggleExpand }) => {
           onClick={() => onToggleExpand(index)}
           className={`w-fit self-center rounded-md px-2 py-1 font-medium transition-colors ${
             dayData.loaded && dayData.expanded
-              ? "bg-blue-300 hover:bg-blue-400 dark:bg-blue-700 dark:hover:bg-blue-600"
-              : "bg-blue-100 hover:bg-blue-200 dark:bg-blue-900 dark:hover:bg-blue-800"
+              ? "bg-orange-300 hover:bg-orange-400 dark:bg-orange-700 dark:hover:bg-orange-600"
+              : "bg-orange-100 hover:bg-orange-200 dark:bg-orange-900 dark:hover:bg-orange-800"
           }`}
           disabled={dayData.loading}
         >

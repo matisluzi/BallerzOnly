@@ -82,7 +82,7 @@ function FirstLogin() {
       <div className="text-center mt-10">
         <Link
           to="/favorites"
-          className="inline-block text-lg text-blue-600 px-10 py-5 rounded hover:bg-green-100 transition"
+          className="inline-block text-lg text-orange-600 px-10 py-5 rounded hover:bg-orange-100 transition"
         >
           Press here to finish adding favorites!
         </Link>

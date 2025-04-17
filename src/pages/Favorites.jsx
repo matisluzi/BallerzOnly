@@ -89,7 +89,7 @@ function Favorites() {
       <div className="container mx-auto mt-20 p-4">
         <NavBar />
         <div className="flex h-64 items-center justify-center">
-          <div className="h-12 w-12 animate-spin rounded-full border-t-2 border-b-2 border-blue-500"></div>
+          <div className="h-12 w-12 animate-spin rounded-full border-t-2 border-b-2 border-orange-500"></div>
         </div>
       </div>
     );
@@ -135,7 +135,7 @@ function Favorites() {
 
               {/* Linking to ESPN */}
               {teamDetails[teamId]?.team ? (
-                <h3 className="mb-3 text-lg font-semibold text-blue-600 dark:text-blue-300">
+                <h3 className="mb-3 text-lg font-semibold text-orange-600 dark:text-orange-300">
                   <a
                     href={teamDetails[teamId].team.links?.[0]?.href || "#"}
                     target="_blank"
@@ -146,7 +146,7 @@ function Favorites() {
                   </a>
                 </h3>
               ) : (
-                <h3 className="mb-3 text-lg font-semibold text-blue-600 dark:text-blue-300">
+                <h3 className="mb-3 text-lg font-semibold text-orange-600 dark:text-orange-300">
                   Loading...
                 </h3>
               )}
@@ -177,7 +177,7 @@ function Favorites() {
             </p>
             <Link
               to="/search"
-              className="inline-block rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600"
+              className="inline-block rounded bg-orange-500 px-4 py-2 font-bold text-white hover:bg-orange-600"
             >
               Add Favorite Teams
             </Link>

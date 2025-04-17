@@ -152,13 +152,13 @@ function Feed() {
         <div className="relative flex flex-col items-center gap-2">
           {/* Previous day button */}
           <button
-            className="transform rounded-full bg-blue-100 p-1 transition-all hover:!scale-110 hover:bg-blue-200 dark:bg-blue-900 dark:hover:bg-blue-800"
+            className="transform rounded-full bg-orange-100 p-1 transition-all hover:!scale-110 hover:bg-orange-200 dark:bg-orange-900 dark:hover:bg-orange-800"
             onClick={showPreviousDay}
           >
             <CaretUp
               size={24}
               weight="bold"
-              className="text-blue-800 dark:text-blue-200"
+              className="text-orange-800 dark:text-orange-200"
             />
           </button>
 
@@ -184,13 +184,13 @@ function Feed() {
 
           {/* Next day button */}
           <button
-            className="transform rounded-full bg-blue-100 p-1 transition-all hover:!scale-110 hover:bg-blue-200 dark:bg-blue-900 dark:hover:bg-blue-800"
+            className="transform rounded-full bg-orange-100 p-1 transition-all hover:!scale-110 hover:bg-orange-200 dark:bg-orange-900 dark:hover:bg-orange-800"
             onClick={showNextDay}
           >
             <CaretDown
               size={24}
               weight="bold"
-              className="text-blue-800 dark:text-blue-200"
+              className="text-orange-800 dark:text-orange-200"
             />
           </button>
         </div>
