@@ -76,7 +76,7 @@ button {
 
 
 .profile-image {
-  @apply  rounded-b-md object-cover mr-4;
+  @apply  rounded-b-md object-cover mr-4 items-stretch md:items-center;
 }
 
 .font-bebas {

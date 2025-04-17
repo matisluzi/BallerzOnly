@@ -94,12 +94,12 @@ function Profile() {
       <NavBar />
 
       <div className="bg-secondary flex w-full gap-4 rounded-lg p-4">
-        <div className="flex grow flex-col">
-          <h1 className="text-2xl font-bold">{profileData.name}</h1>
-          <p className="text-tertiary">{profileData.email}</p>
-          <div className="mt-4 flex flex-col justify-end">
-            <h2 className="text-xl font-medium">Favorite Teams:</h2>
-            <div className="">
+        <div className="flex grow flex-col max-w-xl ml-5 mr-5">
+          <h1 className="text-4xl font-bold items-center text-center mt-10 mb-5">{profileData.name}</h1>
+          <p className="text-tertiary items-center text-center mb-5">{profileData.email}</p>
+          <div className="mt-4 flex flex-col justify-end ">
+            <h2 className="text-xl font-medium mt-3 ml-3">Favorite Teams:</h2>
+            <div className="mb-5">
               {favoriteTeams.length > 0 ? (
                 <ul className="list-disc pl-5">
                   {favoriteTeams.map((teamId) => (

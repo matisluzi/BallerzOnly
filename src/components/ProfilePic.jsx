@@ -61,15 +61,14 @@ function ProfilePicture({ profilePicture, onPictureUpdate }) {
   };
 
   return (
-    <div className="flex flex-col gap-2">
-      <h2 className="text-lg font-bold">Profile Picture</h2>
+    <div className="flex flex-col gap-2 items-center">
 
       {/* Display profile picture from database or preview */}
       {previewUrl || profilePicture ? (
         <img
           src={previewUrl || profilePicture}
           alt="Profile"
-          className="max-w-36 rounded-2xl bg-white object-contain p-2"
+          className="max-w-80 rounded-2xl bg-white object-contain p-2 items-stretch md:items-center mt-2.5 mr-10"
         />
       ) : (
         <div className="flex items-center gap-1">
@@ -89,7 +88,7 @@ function ProfilePicture({ profilePicture, onPictureUpdate }) {
           })}
         >
           <input {...getInputProps()} />
-          <p>Drag 'n' drop some files here, or click to select files</p>
+          <p className="justify-items-center ">Click to select files</p>
         </div>
         {selectedFile && (
           <button
