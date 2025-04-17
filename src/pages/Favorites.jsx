@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
-import { getTeamGames, getTeamDetails, getFavorites, removeFavorite } from "../api";
+import {
+  getTeamGames,
+  getTeamDetails,
+  getFavorites,
+  removeFavorite,
+} from "../api";
 import GameBasketball from "../components/GameBasketball";
+import { Link } from "react-router-dom";
 
 function Favorites() {
   // State variables will go here
@@ -93,7 +99,10 @@ function Favorites() {
     return (
       <div className="container mx-auto mt-20 p-4">
         <NavBar />
-        <div className="relative rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700" role="alert">
+        <div
+          className="relative rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
+          role="alert"
+        >
           <strong className="font-bold">Error! </strong>
           <span className="block sm:inline">{error}</span>
         </div>
@@ -118,7 +127,7 @@ function Favorites() {
               {/* Remove button */}
               <button
                 onClick={() => handleRemoveFavorite(teamId)}
-                className="absolute top-2 right-2 text-red-500 text-lg hover:text-red-700"
+                className="absolute top-2 right-2 text-lg text-red-500 hover:text-red-700"
                 title="Remove from Favorites"
               >
                 −
@@ -144,7 +153,9 @@ function Favorites() {
 
               {/* Games section */}
               <div className="space-y-4">
-                <h4 className="font-medium text-gray-700 dark:text-gray-300">Games:</h4>
+                <h4 className="font-medium text-gray-700 dark:text-gray-300">
+                  Games:
+                </h4>
                 {games[teamId] && games[teamId].length > 0 ? (
                   <div className="space-y-3">
                     {games[teamId].map((game) => (
@@ -152,20 +163,24 @@ function Favorites() {
                     ))}
                   </div>
                 ) : (
-                  <p className="text-gray-500 italic">No upcoming games scheduled</p>
+                  <p className="text-gray-500 italic">
+                    No upcoming games scheduled
+                  </p>
                 )}
               </div>
             </div>
           ))
         ) : (
           <div className="py-8 text-center">
-            <p className="mb-4 text-gray-500">You haven't added any favorite teams yet.</p>
-            <a
-              href="/#/search"
+            <p className="mb-4 text-gray-500">
+              You haven't added any favorite teams yet.
+            </p>
+            <Link
+              to="/search"
               className="inline-block rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600"
             >
               Add Favorite Teams
-            </a>
+            </Link>
           </div>
         )}
       </div>

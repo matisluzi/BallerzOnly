@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 /src/api.js
 .prettierrc
+
+# build files
+build_cise.py
+transfer_cise.sh
